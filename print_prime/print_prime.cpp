@@ -23,22 +23,28 @@ struct is_prime<1>
 	static constexpr bool value = false;
 };
 
+// C++14 supports variable templates
 template <int p>
 constexpr bool is_prime_v = is_prime<p>::value;
 
 template <int p, bool>
 struct print_prime_impl
 {
+	// recursion happens due to this member,
+	// template specialization for every number until explicit specialization
 	print_prime_impl<p-1, is_prime_v<p-1>> np;
 };
 
 template <int p>
 struct prime_number {};
 
+// partial specialization for prime numbers
 template <int p>
 struct print_prime_impl<p, true>
 {
 	print_prime_impl<p-1, is_prime_v<p-1>> np;
+	// only prime number has this ill-formed variable,
+	// thus printed out by compiler
 	int ill_formed = prime_number<p>::value;
 };
 
@@ -54,6 +60,7 @@ struct print_prime : print_prime_impl<p, is_prime_v<p>> {};
 
 int main(int argc, char *argv[])
 {
+	// trigger the specialization
 	print_prime<LAST> a;
 	return 0;
 }
