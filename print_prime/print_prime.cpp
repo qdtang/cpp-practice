@@ -1,6 +1,5 @@
 // This program is ill-formed (due to variable "ill_formed") and 
 // compiler would print out prime numbers up to LAST in error message.
-#include <iostream>
 
 template <int p, int i>
 struct is_prime_impl
@@ -48,6 +47,7 @@ struct print_prime_impl<p, true>
 	int ill_formed = prime_number<p>::value;
 };
 
+// explicit specialization to stop the recursion
 template <>
 struct print_prime_impl<1, false> {};
 
