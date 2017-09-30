@@ -29,8 +29,9 @@ constexpr bool is_prime_v = is_prime<p>::value;
 template <int p, bool>
 struct print_prime_impl
 {
-	// recursion happens due to this member,
-	// template specialization for every number until explicit specialization
+	// recursive template instantiation happens due to this member,
+	// until explicit specialization.
+	// maybe inheritance is another solution
 	print_prime_impl<p-1, is_prime_v<p-1>> np;
 };
 
@@ -42,12 +43,11 @@ template <int p>
 struct print_prime_impl<p, true>
 {
 	print_prime_impl<p-1, is_prime_v<p-1>> np;
-	// only prime number has this ill-formed variable,
+	// only prime numbers have this ill-formed variable,
 	// thus printed out by compiler
 	int ill_formed = prime_number<p>::value;
 };
 
-// explicit specialization to stop the recursion
 template <>
 struct print_prime_impl<1, false> {};
 
