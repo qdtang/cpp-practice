@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
 	std::cout << ANSI_COLOR_CYAN << "CYAN" << ANSI_COLOR_RESET << "\n";
 	// combined pattern
 	std::cout << "\033[31;1;40m" << "RED & BOLD & BLACK_BACKGROUND" << ANSI_COLOR_RESET << "\n";
+	std::cout << ANSI_COLOR_RED << ANSI_BOLD << "RED & BOLD" << ANSI_COLOR_RESET << "\n";
 
 	return 0;
 }
