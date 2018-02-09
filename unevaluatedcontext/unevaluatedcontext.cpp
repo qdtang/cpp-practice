@@ -37,6 +37,7 @@ int main(int argc, char *argv[])
 	static_assert(std::is_same<decltype(i1), int>::value, "");
 	std::cout << std::boolalpha << is_movable<Movable>::value << '\n';
 	std::cout << is_movable<NonMovable>::value << '\n';
+	std::cout << sizeof(std::cout) << '\n';
 	std::cout << sizeof(std::cout << 42) << '\n'; // 42 should NOT be printed out.
 	std::cout << sizeof(std::declval<NoDefaultConstructor>()) << '\n';
 	return 0;
