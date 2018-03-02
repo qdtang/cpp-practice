@@ -4,6 +4,6 @@ int main()
 {
 	auto hello = Hello();
 	hello.speak();
-	hello.speak("uqwl");
+	hello.speak("there");
 	return 0;
 }
