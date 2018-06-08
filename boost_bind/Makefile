@@ -17,8 +17,8 @@ release: boost_bind-o
 	$(run)
 
 
-boost_bind-g boost_bind-o: boost_bind.cpp
-	$(CXX) $(CXXFLAGS) $< -o $@
+boost_bind-g boost_bind-o: boost_bind.cpp exec_func.cpp
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
 clean:
 	$(RM) boost_bind boost_bind-*

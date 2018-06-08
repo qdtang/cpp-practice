@@ -1,20 +1,10 @@
-#include <iostream>
 #include <boost/bind.hpp>
-#include <boost/function.hpp>
 #include <vector>
+#include "exec_func.h"
 
-int add(int a, int b)
+static int add(int a, int b)
 {
 	return a + b;
-}
-
-typedef boost::function<int ()> PF;
-
-void execFunctions(const std::vector<PF>& PFs)
-{
-	for (std::vector<PF>::const_iterator iter = PFs.begin(); iter != PFs.end(); ++iter) {
-		std::cout << (*iter)() << '\n';
-	}
 }
 
 int main(int argc, char *argv[])
