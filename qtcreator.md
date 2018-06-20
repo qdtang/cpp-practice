@@ -1,6 +1,6 @@
 # import existing C++ projects to QtCreator
 
-## Let's assume the project's name is proj.
+## Let's assume the project's name is *proj*
 
  1. touch an empty file named *proj.config*.
  2. create file *proj.creator* with following contents
