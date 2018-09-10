@@ -1,12 +1,8 @@
 #include <iostream>
-#include <boost/python.hpp>
+#include <string>
 
-void hello()
+void hello(const std::string& name)
 {
-	std::cout << "hello, boost python.\n";
+	std::cout << "hello, " << name << "\n";
 }
 
-BOOST_PYTHON_MODULE(hello)
-{
-	boost::python::def("hello", hello);
-}

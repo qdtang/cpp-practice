@@ -1,3 +1,3 @@
 import hello
 
-hello.hello()
+hello.hello("python")
