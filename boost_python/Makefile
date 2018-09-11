@@ -1,10 +1,11 @@
+.PHONY: all cpp python
 all: cpp python
 
 cpp: test
 	./$<
 
 python: test.py hello.so
-	python $<
+	python2.7 $<
 
 test: test.cpp hello.o
 	$(CXX) $^ -o $@
