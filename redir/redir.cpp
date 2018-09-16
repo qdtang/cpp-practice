@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -14,15 +15,16 @@ public:
 		if (_saved_stdout < 0) {
 			perror("dup");
 		}
-		FILE* fp = fopen(path, mode);
+		auto closeFile = [](FILE* fp) {fclose(fp);};
+		// closeFile will be called only if FILE* is not a null pointer
+		std::unique_ptr<FILE, decltype(closeFile)> fp(fopen(path, mode), closeFile);
 		if (!fp) {
 			perror("fopen");
 		}
-		int fd = fileno(fp);
+		int fd = fileno(fp.get());
 		if (dup2(fd, STDOUT_FILENO) < 0) {
 			perror("dup2 in ctor");
 		}
-		close(fd);
 	}
 	~TempStdOut() {
 		std::cout << std::flush;
