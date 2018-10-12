@@ -42,8 +42,8 @@ ln -s -f \$< ${name}
 @./${name}
 endef
 
-release: CXXFLAGS += -O2 -s
-debug: CXXFLAGS += -g -DDEBUG
+release: CXXFLAGS += -O2 -s -DNDEBUG
+debug: CXXFLAGS += -g
 
 debug: ${name}-g
 	\$(run)
