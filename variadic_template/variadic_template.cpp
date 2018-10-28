@@ -1,31 +1,42 @@
 #include <iostream>
 
+// print1: old fashion variadic template version
 template <typename T>
-void print(T&& t)
+void print1(T&& t)
 {
-	std::cout << t << "\n";
+	std::cout << std::forward<T>(t) << "\n";
 }
 
-template <typename T1, typename... Args>
-void print(T1&& t, Args&& ... args)
+template <typename T, typename... Args>
+void print1(T&& t, Args... args)
 {
-	std::cout << t << "\n";
-    if constexpr (std::is_same_v<T1&&, int&>) {
-        t = 17;
-    }
-	print(args...);
+	std::cout << std::forward<T>(t) << "\n";
+	print1(std::forward<Args>(args)...);
 }
 
+// print2: version using constexpr if
+template <typename T, typename... Args>
+void print2(T&& t, Args&&... args)
+{
+	std::cout << std::forward<T>(t) << "\n";
+	if constexpr (sizeof...(args)) {
+		print2(std::forward<Args>(args)...);
+	}
+}
+
+// print3: version using fold expression
 template <typename... Args>
-void print_wrapper(Args&& ... args)
+void print3(Args... args)
 {
-	print(std::forward<Args>(args)...);
+	(std::cout << ... << args) << "\n";
 }
+
 
 int main()
 {
 	int i = 9;
-	print_wrapper(2, 9.4, i, "hello", .9f);
-    std::cout << "after print, i = " << i << "\n";
+	print1(2, 9.4, i, "hello", .9f);
+	print2(2, 9.4, i, "hello", .9f);
+	print3(2, 9.4, i, "hello", .9f);
 	return 0;
 }
