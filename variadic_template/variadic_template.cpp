@@ -29,19 +29,12 @@ void print2(T&& t, Args&&... args)
 	}
 }
 
-template <typename T>
-std::ostringstream writeToStream(T&& t)
-{
-	std::ostringstream oss;
-	oss << std::forward<T>(t) << " ";
-	return oss;
-}
-
 // print3: using fold expression
 template <typename... Args>
 void print3(Args... args)
 {
-	(std::cout <<  ... << (writeToStream(args).str())) << "\n";
+	((std::cout << args << " "), ...);
+	std::cout << "\n";
 }
 
 
