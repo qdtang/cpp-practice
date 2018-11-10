@@ -1,6 +1,9 @@
 .PHONY: all run clean
 all: clean demo
 
+demo.l: demo.tab.h
+	touch $@
+
 lex.yy.c: demo.l
 	flex $<
 
