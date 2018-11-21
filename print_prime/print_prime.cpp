@@ -61,6 +61,6 @@ struct print_prime : print_prime_impl<p, is_prime_v<p>> {};
 int main(int argc, char *argv[])
 {
 	// trigger the specialization
-	print_prime<LAST> a;
+	print_prime<LAST>();
 	return 0;
 }

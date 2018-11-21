@@ -1,3 +1,5 @@
+#!/bin/bash
+
 last=10
 if [ $# -gt 0 ]; then
 	last=$1
