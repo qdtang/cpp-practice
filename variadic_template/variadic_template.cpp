@@ -9,7 +9,7 @@ void print1(T&& t)
 }
 
 template <typename T, typename... Args>
-void print1(T&& t, Args... args)
+void print1(T&& t, Args&&... args)
 {
 	std::cout << std::forward<T>(t) << " ";
 	print1(std::forward<Args>(args)...);
@@ -20,7 +20,7 @@ template <typename T, typename... Args>
 void print2(T&& t, Args&&... args)
 {
 	std::cout << std::forward<T>(t);
-	if constexpr (sizeof...(args)) {
+	if constexpr (sizeof...(args) > 0) {
 		std::cout << " ";
 		print2(std::forward<Args>(args)...);
 	}
@@ -31,9 +31,9 @@ void print2(T&& t, Args&&... args)
 
 // print3: using fold expression
 template <typename... Args>
-void print3(Args... args)
+void print3(Args&&... args)
 {
-	((std::cout << args << " "), ...);
+	((std::cout << std::forward<Args>(args) << " "), ...);
 	std::cout << "\n";
 }
 
