@@ -7,14 +7,14 @@ class IntegralRange
 private:
     T m_begin = 0;
     T m_end = 0;
-    T m_span = 1;
+    T m_step = 1;
 
 public:
     explicit IntegralRange(T end) : m_end{end}
     {
         if (m_begin > m_end)
         {
-            m_span = -1;
+            m_step = -1;
         }
     }
 
@@ -22,25 +22,20 @@ public:
     {
         if (m_begin > m_end)
         {
-            m_span = -1;
+            m_step = -1;
         }
     }
 
-    IntegralRange(T begin, T end, T span) : m_begin{begin}, m_end{end}, m_span{span}
+    IntegralRange(T begin, T end, T step) : m_begin{begin}, m_end{end}, m_step{step}
     {
         if (m_begin < m_end)
         {
-            assert(span > 0);
+            assert(step > 0);
         }
         else
         {
-            assert(span <= 0);
+            assert(step <= 0);
         }
-    }
-
-    T getSpan() const
-    {
-        return m_span;
     }
 
     class iterator
@@ -57,11 +52,11 @@ public:
         }
         bool operator!=(iterator rhs) const
         {
-            return m_range.getSpan() > 0 ? m_current < rhs.m_current : m_current > rhs.m_current;
+            return m_range.m_step > 0 ? m_current < rhs.m_current : m_current > rhs.m_current;
         }
         iterator &operator++()
         {
-            m_current += m_range.getSpan();
+            m_current += m_range.m_step;
             return *this;
         }
     };
