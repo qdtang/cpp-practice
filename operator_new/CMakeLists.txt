@@ -7,7 +7,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "-Wall \
 		            -Wextra \
 					-Werror \
-					-fconcepts \
 					-g \
 					")
 
