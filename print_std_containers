@@ -79,8 +79,8 @@ int main()
     print(str, "");
     std::vector<double> v{2.4, 9.3, 0.3, 8.4};
     print(v);
-        std::vector<Int> vi{Int{93}, Int{42}, Int{}, Int{4}};
-        print(vi);
+    std::vector<Int> vi{Int{93}, Int{42}, Int{}, Int{4}};
+    print(vi);
     std::deque<int> d{3, 9, 4, 0, -1};
     print(d);
     std::array<int, 3> a{9, 4, 7};
